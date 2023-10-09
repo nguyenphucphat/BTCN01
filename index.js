@@ -36,10 +36,19 @@ let dropElementIndex = null;
 
 const newsWraper = document.querySelector('.newsWraper');
 
+const upDownIconsWrap = document.querySelectorAll('.newsUpDown');
 
+upDownIconsWrap.forEach((upDownIcon,i) => {
+    upDownIcon.addEventListener('mousedown', function() {
+        listNews[i].draggable = true;
+    });
+
+    upDownIcon.addEventListener('mouseup', function() {
+        listNews[i].draggable = false;
+    });
+});
 
 listNews.forEach((news)=>{
-    news.draggable = true;
     news.addEventListener('dragstart', dragStart);
     news.addEventListener('dragover', dragOver);
     news.addEventListener('dragend', dragEnd);

@@ -415,7 +415,15 @@ registerBtn.addEventListener('click', function() {
     newCustomer.children[0].textContent = nameValue;
     newCustomer.children[1].textContent = sexValue;
     newCustomer.children[2].textContent = addressValue;
-    newCustomer.children[3].textContent = deliveryTimeValue;
+
+    var dateObj = new Date(deliveryTimeValue);
+    var dd = String(dateObj.getDate()).padStart(2, '0');
+    var mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+    var yyyy = dateObj.getFullYear();
+
+    var formattedDate = dd + '/' + mm + '/' + yyyy;
+
+    newCustomer.children[3].textContent = formattedDate;
 
     var selectedProductsName = document.querySelectorAll('#selectedList #product .productName');
 

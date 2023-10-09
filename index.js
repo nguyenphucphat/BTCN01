@@ -42,10 +42,6 @@ upDownIconsWrap.forEach((upDownIcon,i) => {
     upDownIcon.addEventListener('mousedown', function() {
         listNews[i].draggable = true;
     });
-
-    upDownIcon.addEventListener('mouseup', function() {
-        listNews[i].draggable = false;
-    });
 });
 
 listNews.forEach((news)=>{
@@ -66,6 +62,7 @@ function dragOver(e) {
 
 function dragEnd(e) {
     draggedElement.style.opacity = 1;
+    draggedElement.draggable = false;
 }
 
 function drop(e){

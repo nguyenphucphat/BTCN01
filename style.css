@@ -7,10 +7,6 @@
         font-size: 13px!important;
     }
 
-    .nav{
-        width: 90% !important;
-    }
-
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {

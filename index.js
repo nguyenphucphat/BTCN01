@@ -104,6 +104,7 @@ const anglesLeft = document.querySelector('.anglesLeft');
 
 
 products.forEach((product,i) => {
+    product.draggable = true;
     product.addEventListener('click', function() {
         if(product.classList.contains('productActive')){
             product.classList.remove('productActive');
@@ -178,14 +179,27 @@ selectionProducts = document.querySelectorAll('#selectionList #product');
 var draggedSelection = null;
 var draggedSelected = null;
 
-selectionProducts.forEach((selectionProduct) => {
-    selectionProduct.addEventListener('click', function() {
-        selectionProduct.draggable = true;
-        selectionProduct.addEventListener('dragstart', function(e){
-            draggedSelection = e.target;
+function dragProduct (){
+    selectionProducts.forEach((selectionProduct) => {
+        selectionProduct.addEventListener('mousedown', function() {
+            selectionProduct.addEventListener('dragstart', function(e){
+                draggedSelection = e.target;
+            });
         });
     });
-});
+
+    selectedProducts.forEach((selectedProduct) => {
+        selectedProduct.addEventListener('mousedown', function() {
+    
+            selectedProduct.addEventListener('dragstart', function(e){
+                draggedSelected = e.target;
+            });
+        });
+    });
+    
+}
+
+dragProduct();
 
 selectedList.addEventListener('dragover', function(e){
     e.preventDefault();
@@ -193,20 +207,16 @@ selectedList.addEventListener('dragover', function(e){
 
 selectedList.addEventListener('drop', function(e){
     e.preventDefault();
-    if(draggedSelection!==null){
+    if(draggedSelection!=null){
         selectedList.append(draggedSelection);
         draggedSelection = null;
+        selectedProducts = document.querySelectorAll('#selectedList #product');
+        selectionProducts = document.querySelectorAll('#selectionList #product');
+
+        dragProduct();
     }
 });
 
-selectedProducts.forEach((selectedProduct) => {
-    selectedProduct.addEventListener('click', function() {
-        selectedProduct.draggable = true;
-        selectedProduct.addEventListener('dragstart', function(e){
-            draggedSelected = e.target;
-        });
-    });
-});
 
 selectionList.addEventListener('dragover', function(e){
     e.preventDefault();
@@ -215,10 +225,13 @@ selectionList.addEventListener('dragover', function(e){
 
 selectionList.addEventListener('drop', function(e){
     e.preventDefault();
-    if(draggedSelected!==null){
+    if(draggedSelected!=null){
         selectionList.append(draggedSelected);
         draggedSelected = null;
+        selectedProducts = document.querySelectorAll('#selectedList #product');
+        selectionProducts = document.querySelectorAll('#selectionList #product');
 
+        dragProduct();
     }
 });
 
